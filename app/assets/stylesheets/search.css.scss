@@ -1,3 +1,44 @@
 // Place all the styles related to the Search controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#titlecol {
+  width: 15%;
+}
+
+#synopsiscol {
+  width: 50%;
+}
+
+#ratingcol {
+  width: 10%;
+}
+
+#castcol {
+  width: 10%;
+}
+
+.centredcell {
+  text-align: center;
+}
+
+.titlecell {
+  text-align: center;
+  font-weight: bold;
+  font-size: 16px;
+}
+ 
+.ratingscell {
+  text-align: center;
+  color: rgb(80, 107, 22);
+  font-weight: bold; 
+  font-size: 48px;
+}
+
+
+.spinner {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  vertical-align: middle;
+}

@@ -1,0 +1,26 @@
+<br />Showing <%= 10*(@page-1)+1 %> to <%= [10*@page, @total].min %> of <%= @total %>. <%= "Only showing first 250 results." if @total > 250 %>
+<% @maxpage = [(@total-1)/10+1, 25].min%>
+<br />Page <%= link_to("1", "javascript:search(1)") + " ... " if @page > 5 %><% ([1, @page - 4].max..[@maxpage, @page + 4].min).each do |pageno| %><%= link_to pageno, "javascript:search(#{pageno})" if @page != pageno %><%= pageno if @page == pageno %> <% end %> <%= " ... " if @page + 4 < @maxpage %><%= link_to(@maxpage, "javascript:search(#{@maxpage})") if @page + 4 < @maxpage%>
+<br />
+<table border="1">
+  <tr>
+    <th></th>
+    <th id='titlecol'>Title</th>
+    <th id='synopsiscol'>Synopsis</th>
+    <th id='castcol'>Cast</th>
+    <th id='ratingcol'>Critic Rating</th>
+  </tr>
+  <% @movies.each do |movie| %>
+    <tr>
+      <td class='centredcell' ><img width='144' height='213' src='<%= movie["posters"]["detailed"] %>' /></td>
+      <td class='titlecell' ><%= movie["title"] %> (<%= movie["year"] %>)</td>
+      <td class='centredcell' ><%= movie["synopsis"] %></td>
+      <td class='centredcell' >
+        <% movie["abridged_cast"].each do |actor| %>
+          <%= actor["name"] %><br />
+        <% end %>
+      </td>
+      <td class='ratingscell' ><%= image_tag "fresh.png" if movie["ratings"]["critics_rating"] == "Certified Fresh" %><%= image_tag "rotten.png" if movie["ratings"]["critics_rating"] == "Rotten" %><%= movie["ratings"]["critics_score"].to_s + "%" if movie["ratings"]["critics_score"] > 0 %></td>
+    </tr>
+  <% end %>
+</table>

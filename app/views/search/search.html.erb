@@ -1,8 +1,8 @@
 <h1>Search Movies by Title</h1>
-<%= form_tag do %>
+<%= form_tag 'action', :id=>'searchform' do %>
   <%= label_tag :query, "Title (or part):" %>
   <%= text_field_tag :query, "National Treasure" %>
-  <%= button_to_function "Search", "search()" %>
+  <%= submit_tag "Search" %>
 <% end %>
 
 <div id="results" />
