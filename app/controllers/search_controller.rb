@@ -3,10 +3,10 @@ require 'json'
 require 'net/http'
 
 class SearchController < ApplicationController
+  layout :resolve_layout
+
   def search
   end
-
-  respond_to :json
 
   def getMovies
     @querytext = params[:query]
@@ -23,8 +23,20 @@ class SearchController < ApplicationController
     @movies = JSON.parse(data)["movies"]
   end
 
+  private
+
+  def resolve_layout
+    case action_name
+    when "getMovies"
+      "minimal"
+    else
+      "application"
+    end
+  end
+
   def inflate(string)
     gz = Zlib::GzipReader.new(StringIO.new(string))
     gz.read
   end
+
 end

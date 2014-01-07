@@ -22,7 +22,3 @@
        url('../assets/glyphicons-halflings-regular.ttf') format ('ttf'),
        url('../assets/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format ('svg');
 }
-
-body {
-	font-family:sans-serif;
-}

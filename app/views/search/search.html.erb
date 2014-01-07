@@ -1,8 +1,13 @@
+<div class="container">
 <h1>Search Movies by Title</h1>
 <%= form_tag 'action', :id=>'searchform' do %>
-  <%= label_tag :query, "Title (or part):" %>
-  <%= text_field_tag :query, "National Treasure" %>
-  <%= submit_tag "Search" %>
+  <div class="input-group input-group-lg">
+    <%= text_field_tag :query, "", :class => "form-control", :placeholder => "Title (or part)" %>
+    <span class="input-group-btn">
+      <button class="btn btn-default" type="button">Search</button>
+    </span>
+  </div>
 <% end %>
 
 <div id="results" />
+</div>
