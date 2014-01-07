@@ -4,10 +4,9 @@
   <div class="input-group input-group-lg">
     <%= text_field_tag :query, "", :class => "form-control", :placeholder => "Title (or part)" %>
     <span class="input-group-btn">
-      <button class="btn btn-default" type="button">Search</button>
+      <input class="btn btn-default" type="submit" value="Search"/>
     </span>
   </div>
 <% end %>
 
-<div id="results" />
-</div>
+<div id="results" class="collapse in" /></div>
