@@ -9,12 +9,28 @@ $(document).ready(function(){
 		search(1);
 		return false;
 	});
+	$("#results").on('hidden.bs.collapse', showResults);
 });
 
 function search(pageno){
         queryURI = encodeURIComponent($("#query").val());
-        $("#results").html("<div class='spinner'><img src='assets/spinner.gif'/></div>");
+	$("#results").collapse('hide');
+        $("#spinner").html("<div class='spinner'><img src='assets/spinner.gif'/></div>");
         $.ajax({url:"/search/getMovies", data:{query:queryURI, page:pageno}}).done(function(data){
-                $("#results").html(data);
+		resultdata = data;
+		showResults();
         });
 };
+
+resultsready = 0;
+resultdata = "";
+
+function showResults(){
+	resultsready++;
+	if(resultsready == 2) {
+		$("#spinner").html("");
+		$("#results").html(resultdata);
+		$("#results").collapse('show');
+		resultsready = 0;
+	}
+}
