@@ -1,7 +1,9 @@
 <% if @total != 0 %>
-	<br />Showing <%= 10*(@page-1)+1 %> to <%= [10*@page, @total].min %> of <%= @total %>. <%= "Only showing first 250 results." if @total > 250 %>
-	<% @maxpage = [(@total-1)/10+1, 25].min%>
-	<br /><%= link_to("1", "javascript:search(1)") + " ... " if @page > 5 %><% ([1, @page - 4].max..[@maxpage, @page + 4].min).each do |pageno| %><%= link_to pageno, "javascript:search(#{pageno})" if @page != pageno %><%= pageno if @page == pageno %> <% end %> <%= " ... " if @page + 4 < @maxpage %><%= link_to(@maxpage, "javascript:search(#{@maxpage})") if @page + 4 < @maxpage%>
+	<% if @page >= 0 %>
+		<br />Showing <%= 10*(@page-1)+1 %> to <%= [10*@page, @total].min %> of <%= @total %>. <%= "Only showing first 250 results." if @total > 250 %>
+		<% @maxpage = [(@total-1)/10+1, 25].min%>
+		<br /><%= link_to("1", "javascript:search(1)") + " ... " if @page > 5 %><% ([1, @page - 4].max..[@maxpage, @page + 4].min).each do |pageno| %><%= link_to pageno, "javascript:search(#{pageno})" if @page != pageno %><%= pageno if @page == pageno %> <% end %> <%= " ... " if @page + 4 < @maxpage %><%= link_to(@maxpage, "javascript:search(#{@maxpage})") if @page + 4 < @maxpage%>
+	<% end %>
 	<br />
 	<table class="table table-hover">
 	  <tr>
