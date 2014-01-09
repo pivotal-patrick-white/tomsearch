@@ -1,13 +1,36 @@
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#">TomSearch</a>
+		</div>
+		<div class="navbar-collapse collapse">
+			<ul class="nav navbar-nav">
+				<li id="nav-bo" class="active"><a href="javascript:search(0,1)">Box Office</a></li>
+				<li id="nav-it" ><a href="javascript:search(1,1)">In Theatres</a></li>
+				<li id="nav-op" ><a href="javascript:search(2,1)">Opening</a></li>
+				<li id="nav-up" ><a href="javascript:search(3,1)">Upcoming</a></li>
+				<li id="nav-se" ><a href="javascript:search(4,1)">Search</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
 <div class="container">
-<h1 id="pagetitle">Box Office</h1>
-<%= form_tag 'action', :id=>'searchform' do %>
-  <div class="input-group input-group-lg">
-    <%= text_field_tag :query, "", :class => "form-control", :placeholder => "Search Movies by Title" %>
-    <span class="input-group-btn">
-      <input class="btn btn-default" type="submit" value="Search"/>
-    </span>
-  </div>
-<% end %>
+	<h1 id="pagetitle">Box Office</h1>
+	<%= form_tag 'action', :id=>'searchform', :class => "collapse" do %>
+		<div class="input-group input-group-lg">
+			<%= text_field_tag :query, "", :class => "form-control", :placeholder => "Search Movies by Title" %>
+			<span class="input-group-btn">
+				<input class="btn btn-default" type="submit" value="Search"/>
+			</span>
+		</div>
+	<% end %>
 
-<div id="spinner"></div>
-<div id="results" class="collapse in" /></div>
+	<div id="spinner"></div>
+	<div id="results" class="collapse in" />
+</div>
