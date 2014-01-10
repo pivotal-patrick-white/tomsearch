@@ -16,12 +16,12 @@
 			<% end %>
 	  </tr>
 	  <% @movies.each do |movie| %>
-	    <tr>
+	    <tr id="movie<%= movie["id"] %>" >
 	      <td class='centredcell' ><img width='144' height='213' src='<%= movie["posters"]["detailed"] %>' /></td>
 	      <td class='titlecell' ><%= movie["title"] %> (<%= movie["year"] %>)</td>
 	      <td class='centredcell' ><%= movie["synopsis"] %></td>
 	      <td class='centredcell' >
-		<%= Array.new(movie["abridged_cast"].length){|i| movie["abridged_cast"][i]["name"]}.join(", ") %>
+					<%= cast_list(movie) %>
 	      </td>
 				<% if @resulttype != 3 %>
 	      	<td class='ratingscell' ><%= image_tag "fresh.png" if movie["ratings"]["critics_rating"] == "Fresh" %><%= image_tag "cfresh.png" if movie["ratings"]["critics_rating"] == "Certified Fresh" %><%= image_tag "rotten.png" if movie["ratings"]["critics_rating"] == "Rotten" %><%= movie["ratings"]["critics_score"].to_s + "%" if movie["ratings"]["critics_score"] > 0 %></td>
@@ -30,7 +30,7 @@
 	  <% end %>
 	</table>
 <% else %>
-<div class="alert alert-info">
-  <a href="#" class="alert-link">No results found.</a>
-</div>
+	<div class="alert alert-info">
+		<a href="#" class="alert-link">No results found.</a>
+	</div>
 <% end %>

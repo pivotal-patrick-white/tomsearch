@@ -1,6 +1,7 @@
 TomsearchRails::Application.routes.draw do
   get "search/search"
   get "search/getMovies"
+	get "search/getDetails"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
