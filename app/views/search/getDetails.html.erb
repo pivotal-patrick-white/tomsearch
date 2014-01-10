@@ -1,1 +1,60 @@
-<%= movie["synopsis"] %>
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	<h3 class="modal-title">
+		<%= @movie["title"] %> <%= "(" + @movie["year"].to_s + ")" unless @movie["year"].respond_to?(:empty?) %>
+	</h3>
+</div>
+<div class="modal-body details-body">
+	<div class="details-block">
+		<div class="details-poster-container">
+			<img src="<%= @movie["posters"]["detailed"] %>" class="details-poster" />
+		</div>
+		<div class="details-ratings">
+			<div class="details-critics-rating">
+				<h4>Critics Rating</h4>
+				<span class="ratings">
+					<% if @movie["ratings"]["critics_score"] >= 0 %>
+						<%= @movie["ratings"]["critics_score"].to_s + "%" %>
+					<% else %>
+						N/A
+					<% end %>
+				</span>
+				<span class="details-ratings-image">
+					<%= create_image @movie["ratings"]["critics_rating"] %>
+				</span>
+			<div class="details-consensus"><%= @movie["critics_consensus"] unless @movie["critics_consensus"].nil? %></div>
+			</div>
+			<div class="details-audience-rating">
+				<h4>Audience Rating</h4>
+				<span class="ratings">
+					<% if @movie["ratings"]["audience_score"] >= 0 %>
+						<%= @movie["ratings"]["audience_score"].to_s + "%" %>
+					<% else %>
+						N/A
+					<% end %>
+				</span>
+				<span class="details-ratings-image">
+					<%= create_image @movie["ratings"]["audience_rating"] %>
+				</span>
+			</div>
+		</div>
+		<div style="clear:both"></div>
+	</div>
+	<div class="details-block">
+		<% unless cast_list(@movie).empty? %>
+			With <%= cast_list(@movie) %>.<br /><br />
+		<% end %>
+		MPAA Rating: <%= @movie["mpaa_rating"] %>
+		<% unless @movie["runtime"].respond_to?(:empty?) %>
+			<br /><%= @movie["runtime"] %> minutes
+		<% end %>
+		<% unless @movie["synopsis"].empty? %>
+			<h4>Synopsis</h4>
+			<%= @movie["synopsis"] %>
+		<% end %>
+	</div>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+

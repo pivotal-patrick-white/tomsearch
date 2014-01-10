@@ -77,6 +77,13 @@ function search(type, pageno){
 resultsready = 0;
 resultdata = "";
 
+function getDetails(movieid){
+	$.ajax({url:"/search/getDetails", data:{id:movieid}}).done(function(data){
+		$("#detailscontent").html(data);
+		$("#details").modal('show');
+	});
+}
+
 function showResults(){
 	resultsready++;
 	if(resultsready == 2) {
