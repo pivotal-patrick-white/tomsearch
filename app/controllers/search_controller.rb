@@ -12,10 +12,11 @@ class SearchController < ApplicationController
 		@resulttype = params[:resulttype].to_i
 		@querytext = params[:query]
 		@page = params[:page].to_i
-		case @resulttype
+
+		case @resulttype #choose which api to use
 		when 0
 			queryURI = URI.parse("http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?limit=10&country=us&apikey=7er6em5vc84hq6my9kr3t6ga")
-			@page = -1
+			@page = -1 #don't show page selector
 		when 1
 			queryURI = URI.parse("http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json?page_limit=10&page=#{@page}&country=us&apikey=7er6em5vc84hq6my9kr3t6ga")
 		when 2
@@ -26,6 +27,7 @@ class SearchController < ApplicationController
 		when 4
 			queryURI = URI.parse("http://api.rottentomatoes.com/api/public/v1.0/movies.json?q=#{@querytext}&page_limit=10&page=#{@page}&apikey=7er6em5vc84hq6my9kr3t6ga")
 		end
+
 		http = Net::HTTP.new(queryURI.host, queryURI.port)
 		request = Net::HTTP::Get.new(queryURI.request_uri)
 		response = http.request(request)
@@ -33,13 +35,14 @@ class SearchController < ApplicationController
 		data = response.body
 		data = inflate(data) if response["Content-Encoding"] == "gzip"
 		
-		@total = JSON.parse(data)["total"]
-		@movies = JSON.parse(data)["movies"]
+		@total = JSON.parse(data)["total"] #total number of movie results
+		@movies = JSON.parse(data)["movies"] #json array of movies
 	end
 
 	def getDetails
 		@id = params[:id]
 		queryURI = URI.parse("http://api.rottentomatoes.com/api/public/v1.0/movies/#{@id}.json?apikey=7er6em5vc84hq6my9kr3t6ga");
+
 		http = Net::HTTP.new(queryURI.host, queryURI.port)
 		request = Net::HTTP::Get.new(queryURI.request_uri)
 		response = http.request(request)
@@ -47,7 +50,7 @@ class SearchController < ApplicationController
 		data = response.body
 		data = inflate(data) if response["Content-Encoding"] == "gzip"
 
-		@movie = JSON.parse(data)
+		@movie = JSON.parse(data) #json object representing movie
 		
 	end
 
@@ -56,7 +59,7 @@ class SearchController < ApplicationController
 	def resolve_layout
 		case action_name
 		when "getMovies", "getDetails"
-			"minimal"
+			"minimal" #no wrapping in content tags
 		else
 			"application"
 		end

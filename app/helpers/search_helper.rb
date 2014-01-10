@@ -2,11 +2,11 @@ module SearchHelper
 	
 	def cast_list(movie)
 		cast = movie["abridged_cast"]
-		names = Array.new(cast.length){|i| cast[i]["name"]}
+		names = Array.new(cast.length){|i| cast[i]["name"]} #the name field of each hash in the cast array
 		if names.length > 1
-			names[0...-1].join(", ") + " and " + names[-1]
+			names[0...-1].join(", ") + " and " + names[-1] #join all but the last with ',' and add the last one with 'and'
 		elsif names.length == 1
-			names[0]
+			names[0] #only show the name
 		else
 			""
 		end
