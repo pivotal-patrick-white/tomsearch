@@ -29,6 +29,7 @@ function search(type, pageno){
 	if(currenttype != type){
 		if(currenttype == 4){
 			$("#searchform").collapse('hide');
+			$("#query").blur();
 		}
 		$("#nav-bo").removeClass();
 		$("#nav-it").removeClass();
@@ -57,6 +58,7 @@ function search(type, pageno){
 				setTitle("Search Movies");
 				$("#nav-se").addClass("active");
 				$("#searchform").collapse('show');
+				$("#query").focus();
 				break;
 		}
 	}
