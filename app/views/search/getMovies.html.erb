@@ -6,26 +6,26 @@
 	<% end %>
 	<br />
 	<table class="table table-hover">
-	  <tr>
-	    <th></th>
-	    <th id='titlecol'>Title</th>
-	    <th id='castcol'>Cast</th>
+		<tr>
+			<th></th>
+			<th id='titlecol'>Title</th>
+			<th id='castcol'>Cast</th>
 			<% if @resulttype != 3 %>
 				<th id='ratingcol'>Critic Rating</th>
 			<% end %>
-	  </tr>
-	  <% @movies.each do |movie| %>
-	    <tr id="movie<%= movie["id"] %>" onclick="getDetails(<%= movie["id"] %>)" class="movierow" >
-	      <td class='centredcell' ><img width='144' height='213' src='<%= movie["posters"]["detailed"] %>' /></td>
-	      <td class='titlecell centredcell' ><%= movie["title"] %> <%= "(" + movie["year"].to_s + ")" unless movie["year"].respond_to?(:empty?) %></td>
-	      <td class='centredcell' >
+		</tr>
+		<% @movies.each do |movie| %>
+			<tr id="movie<%= movie["id"] %>" onclick="getDetails(<%= movie["id"] %>)" class="movierow" >
+				<td class='centredcell' ><img width='144' height='213' src='<%= movie["posters"]["detailed"] %>' /></td>
+				<td class='titlecell centredcell' ><%= movie["title"] %> <%= "(" + movie["year"].to_s + ")" unless movie["year"].respond_to?(:empty?) %></td>
+				<td class='centredcell' >
 					<%= cast_list(movie) %>
-	      </td>
+				</td>
 				<% if @resulttype != 3 %>
-	      	<td class='ratings centredcell' ><%= create_image movie["ratings"]["critics_rating"] %><br /><%= movie["ratings"]["critics_score"].to_s + "%" if movie["ratings"]["critics_score"] >= 0 %></td>
+					<td class='ratings centredcell' ><%= create_image movie["ratings"]["critics_rating"] %><br /><%= movie["ratings"]["critics_score"].to_s + "%" if movie["ratings"]["critics_score"] >= 0 %></td>
 				<% end %>
-	    </tr>
-	  <% end %>
+			</tr>
+		<% end %>
 	</table>
 <% else %>
 	<div class="alert alert-info">
